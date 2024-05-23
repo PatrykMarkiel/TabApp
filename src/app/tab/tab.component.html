@@ -1,0 +1,58 @@
+<div class="Logo">
+  <div id="decoration">
+    <h1 class="LogoText">{{ title }}</h1>
+    <div class="NavText" *ngIf="selectedCategory">
+      <div class="CategoryTitle">
+        <span>{{ selectedCategory }}</span>
+      </div>
+    </div>
+    <div class="NavText" *ngIf="selectedAuthor">
+      <div class="CategoryTitle">
+        <span>{{ selectedAuthor }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="music-categories">
+    <ul class="ulCenter">
+      <li (click)="toggleGenresList()">
+        <h2 id="text">genres</h2>
+      </li>
+    </ul>
+    <div *ngIf="showGenresList">
+      <ul>
+        <li *ngFor="let category of getAllCategories()">
+          <a href="#" class="sideFilter" (click)="selectCategory(category)">{{ category }}</a>
+        </li>
+      </ul>
+    </div>
+    <ul class="ulCenter">
+      <li (click)="toggleAuthorsList()">
+        <h2 id="text">Authors</h2>
+      </li>
+    </ul>
+    <div *ngIf="showAuthorsList">
+      <ul>
+        <li *ngFor="let author of getAllAuthors()">
+          <a href="#" class="sideFilter" (click)="selectAuthor(author)">{{ author }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="songs" *ngIf="selectedCategory || !selectedCategory">
+    <div class="search">
+      <input id="searchInput" type="text" [(ngModel)]="searchQuery" placeholder="Search song..." (input)="suggest()">
+    </div>
+    <ul *ngIf="suggestions.length > 0" class="list">
+      <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)" class="text">
+        {{ suggestion }}
+      </li>
+    </ul>
+    <ul *ngIf="suggestions.length == 0" class="list">
+      <li *ngFor="let song of getFilteredSongs()" class="text">
+        {{ song.songTitle }} - {{ song.songAuthor }}
+      </li>
+    </ul>
+  </div>
+</div>
