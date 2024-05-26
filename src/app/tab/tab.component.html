@@ -13,44 +13,57 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="music-categories">
-    <ul class="ulCenter">
-      <li (click)="toggleGenresList()">
-        <h2 id="text">genres</h2>
-      </li>
-    </ul>
-    <div *ngIf="showGenresList">
-      <ul>
-        <li *ngFor="let category of getAllCategories()">
-          <a href="#" class="sideFilter" (click)="selectCategory(category)">{{ category }}</a>
-        </li>
-      </ul>
-    </div>
-    <ul class="ulCenter">
-      <li (click)="toggleAuthorsList()">
-        <h2 id="text">Authors</h2>
-      </li>
-    </ul>
-    <div *ngIf="showAuthorsList">
-      <ul>
-        <li *ngFor="let author of getAllAuthors()">
-          <a href="#" class="sideFilter" (click)="selectAuthor(author)">{{ author }}</a>
-        </li>
-      </ul>
+<div *ngIf="selectedSong" id="ShowedTabs">
+  <button (click)="resetSelection()" id="GoBackButton">Go back</button>
+  <div *ngFor="let version of selectedSong.tabVersions" class="text">
+    <h2>Tab no: {{ version.tab_id }}</h2>
+    <p>Tab Authors: {{ version.tabAuthors.join(", ") }}</p>
+    <div *ngFor="let tab of version.tabs">
+      <h4>{{ tab.section }}</h4>
+      <pre *ngFor="let line of tab.tab">{{ line.join("\n") }}</pre>
     </div>
   </div>
-  <div class="songs" *ngIf="selectedCategory || !selectedCategory">
+</div>
+<div class="container" *ngIf="!selectedSong">
+  <div class="music-categories">
+    <div>
+      <ul class="ulCenter">
+        <li (click)="toggleGenresList()">
+          <h2 id="text">genres</h2>
+        </li>
+      </ul>
+      <div *ngIf="showGenresList">
+        <ul>
+          <li *ngFor="let category of getAllCategories()">
+            <a href="#" class="sideFilter" (click)="selectCategory(category)">{{ category }}</a>
+          </li>
+        </ul>
+      </div>
+      <ul class="ulCenter">
+        <li (click)="toggleAuthorsList()">
+          <h2 id="text">Authors</h2>
+        </li>
+      </ul>
+      <div *ngIf="showAuthorsList">
+        <ul>
+          <li *ngFor="let author of getAllAuthors()">
+            <a href="#" class="sideFilter" (click)="selectAuthor(author)">{{ author }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="songs" *ngIf="(selectedCategory || !selectedCategory)">
     <div class="search">
       <input id="searchInput" type="text" [(ngModel)]="searchQuery" placeholder="Search song..." (input)="suggest()">
     </div>
     <ul *ngIf="suggestions.length > 0" class="list">
-      <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)" class="text">
+      <li *ngFor="let suggestion of suggestions"  class="text">
         {{ suggestion }}
       </li>
     </ul>
     <ul *ngIf="suggestions.length == 0" class="list">
-      <li *ngFor="let song of getFilteredSongs()" class="text">
+      <li *ngFor="let song of getFilteredSongs()" class="text" (click)="selectSong(song)">
         {{ song.songTitle }} - {{ song.songAuthor }}
       </li>
     </ul>

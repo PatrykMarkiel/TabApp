@@ -1,1 +1,8 @@
-<p>tab-details works!</p>
+<div *ngFor="let version of guitarTab.tabVersions">
+  <h2>Version ID: {{version.tab_id}}</h2>
+  <p>Tab Authors: {{version.tabAuthors.join(", ")}}</p>
+  <div *ngFor="let tab of version.tabs">
+    <h3>Section: {{tab.section}}</h3>
+    <pre *ngFor="let line of tab.tab">{{line.join("\n")}}</pre>
+  </div>
+</div>

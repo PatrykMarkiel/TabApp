@@ -16,12 +16,10 @@
   padding-right: 3rem;
   border-radius:0px 50px 5px 0px ;
 }
-
 #decoration {
   display: flex;
   align-items: center;
 }
-
 .CategoryTitle {
   color: var(--text);
   font-size: xx-large;
@@ -29,45 +27,44 @@
   align-items: center;
   gap: 5px;
 }
-
 .clear-button {
   background: none;
-  border: 2px solid var(--text); /* Dodanie obramowania */
-  border-radius: 50%; /* Okrągły kształt */
+  border: 2px solid var(--text);
+  border-radius: 50%;
   color: var(--text);
   cursor: pointer;
   font-size: large;
-  padding: 5px; /* Odstęp wewnętrzny dla większego przycisku */
-  margin-left: 5px; /* Zmniejszenie odstępu po lewej stronie przycisku */
-  width: 30px; /* Ustawienie szerokości */
-  height: 30px; /* Ustawienie wysokości */
+  padding: 5px;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .clear-button:hover {
-  background-color: var(--text); /* Kolor tła po najechaniu kursorem */
-  color: white; /* Kolor tekstu po najechaniu kursorem */
+  background-color: var(--text);
+  color: white;
 }
-
-
 .container {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
 }
-
+#ShowedTabs{
+  text-align: center;
+  font-size: x-large;
+  font-family: "Courier New";
+}
 .NavText{
   padding-left: 10px;
-  text-align: left;
-  width: 23rem;
+  text-align: center;
+  width: 28rem;
 }
 .music-categories {
   background-color: var(--logoNav);
   width: 20%;
 }
-
 .songs {
   width: 90%;
   text-align: center;
@@ -84,7 +81,6 @@
   font-size: larger;
   vertical-align: top;
 }
-
 .music-categories ul {
   list-style-type: none;
   margin: 0px;
@@ -111,6 +107,38 @@
 .sideFilter{
   font-size: x-large;
 }
+/*Tabs*/
+#GoBackButton {
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  border: none;
+  color: var(--text);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+#GoBackButton:hover {
+  background-color: #45a049;
+  color: var(--text);
+}
+.song-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+/*small elements*/
 @media (max-width: 1050px) {
   .container {
     flex-direction: column;
@@ -161,19 +189,18 @@
   }
   .CategoryTitle {
     padding-left: 0%;
-    width: 25rem; /* Zwiększona szerokość */
+    width: 25rem;
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Większy odstęp między tytułem a przyciskiem */
-    margin-bottom: 20px; /* Większy odstęp między tytułami */
+    gap: 30px;
+    margin-bottom: 20px;
     margin-left: 10px;
     margin-right: 20px;
   }
   .LogoText {
     font-size: 300%;
   }
-
 }
 @media (max-width: 800px) {
   .CategoryTitle {

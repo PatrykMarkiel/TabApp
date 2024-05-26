@@ -23,6 +23,7 @@ export class TabComponent {
   filteredSongs: GuitarTab[] = [];
   showGenresList: boolean = false;
   showAuthorsList: boolean = false;
+  selectedSong: GuitarTab | null;
   constructor(private guitarTabsService: GuitarTabsService, private router: Router) { }
   ngOnInit(): void {
     this.guitarTabsService.getAllSongs().subscribe(tabs => {
@@ -36,10 +37,13 @@ export class TabComponent {
   toggleAuthorsList(): void {
     this.showAuthorsList = !this.showAuthorsList;
   }
-
+  selectSong(song: GuitarTab) {
+    this.selectedSong = song;
+    this.selectCategory(song.songAuthor);
+    this.selectAuthor(song.songTitle);
+  }
   selectCategory(category: string | null): void {
     this.searchQuery = '';
-    this.selectedAuthor = null;
 
     if (category) {
       this.selectedCategory = category;
@@ -50,6 +54,17 @@ export class TabComponent {
     }
   }
 
+  selectAuthor(author: string | null): void {
+    this.searchQuery = '';
+
+    if (author) {
+      this.selectedAuthor = author;
+      this.selectedSongs = this.GuitarTabs.filter(tab => tab.songAuthor === author);
+    } else {
+      this.selectedAuthor = null;
+      this.selectedSongs = this.GuitarTabs.map(tab => tab);
+    }
+  }
 
   getAllCategories(): string[] {
     const allCategoriesSet = new Set<string>();
@@ -69,17 +84,10 @@ export class TabComponent {
 
   return Array.from(allAuthorsSet);
 }
-selectAuthor(author: string | null): void {
-  this.searchQuery = '';
+resetSelection(): void {
+  this.selectedSong = null;
+  this.selectedAuthor = null;
   this.selectedCategory = null;
-
-  if (author) {
-    this.selectedAuthor = author;
-    this.selectedSongs = this.GuitarTabs.filter(tab => tab.songAuthor === author);
-  } else {
-    this.selectedAuthor = null;
-    this.selectedSongs = this.GuitarTabs.map(tab => tab);
-  }
 }
 
 suggest(): void {

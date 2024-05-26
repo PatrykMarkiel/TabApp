@@ -5,9 +5,10 @@ export interface GuitarTab {
   musicCategories: string;
   tabVersions: {
     tab_id: number;
-    tabs: string[][][];
+    tabs: {
+      section: string;
+      tab: string[][];
+    }[];
     tabAuthors: string[];
-    difficulty: number;
-    rating: number;
   }[];
 }

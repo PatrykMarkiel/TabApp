@@ -4,8 +4,10 @@ import {RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TabComponent } from './tab/tab.component';
+import { TabDetailsComponent } from './tab-details/tab-details.component';
 
 @NgModule({
+  providers: [],
   declarations: [
     AppComponent,
     TabComponent,
@@ -13,9 +15,9 @@ import { TabComponent } from './tab/tab.component';
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TabDetailsComponent
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
